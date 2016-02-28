@@ -49,6 +49,24 @@ Modification History:
 			<cfset addRow("#arguments.label# invalid",0)>
 		</cfif>
 	</cffunction>
+	
+	<cffunction name="getTicks" access="public" returntype="numeric" output="false" hint="returns the number of milliseconds a timer has ran">
+		<cfargument name="label" required="true" type="string" />
+		<cfscript>
+			var q = new query(
+	    		dbtype = "query"
+	        	,sql = "
+	        		SELECT * FROM timers WHERE method = '#arguments.targTimer#'
+	        	"        
+			);
+	        q.setAttributes( timers = timer.getTimerScope() );
+	        var results = q.execute().getResult();
+	        
+	        var duration = results["time"][1];
+	        
+	        return duration;
+		</cfscript>
+	</cffunction>
 
 	<cffunction name="logTime" access="public" returntype="void" output="false" hint="Use this method to add a new timer entry to the timers.">
 		<cfargument name="Label" 	 required="true" type="string" hint="The lable of the timer.">
