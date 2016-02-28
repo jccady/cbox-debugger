@@ -56,10 +56,10 @@ Modification History:
 			var q = new query(
 	    		dbtype = "query"
 	        	,sql = "
-	        		SELECT * FROM timers WHERE method = '#arguments.targTimer#'
+	        		SELECT * FROM timers WHERE method = '#arguments.label#'
 	        	"        
 			);
-	        q.setAttributes( timers = timer.getTimerScope() );
+	        q.setAttributes( timers = getTimerScope() );
 	        var results = q.execute().getResult();
 	        
 	        var duration = results["time"][1];
